@@ -39,3 +39,25 @@ nb-configuration.xml
 ### OS ###
 .DS_Store
 Thumbs.db
+
+### Spring Boot config local / secretos ###
+application-local.properties
+application-dev.properties
+application-prod.properties
+application-secrets.properties
+.env
+.env.*
+!.env.example
+
+### Claves y certificados ###
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+### Eclipse ###
+.project
+.classpath
+.settings/
+bin/
