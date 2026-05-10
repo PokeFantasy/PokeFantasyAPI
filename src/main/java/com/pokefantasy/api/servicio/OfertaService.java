@@ -62,6 +62,7 @@ public class OfertaService {
         return ofertaRepository.existsByIdPokemonAndIdOferenteAndEstado(idPokemon, idOferente, "pendiente");
     }
 
+    @Transactional
     public boolean rechazarOferta(int idOferta) {
         return ofertaRepository.actualizarEstado(idOferta, "rechazada") > 0;
     }
