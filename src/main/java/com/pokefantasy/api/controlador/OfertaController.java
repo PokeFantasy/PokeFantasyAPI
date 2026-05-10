@@ -6,6 +6,7 @@ import com.pokefantasy.api.dto.OfertaEnviadaDTO;
 import com.pokefantasy.api.dto.OfertaRecibidaDTO;
 import com.pokefantasy.api.modelo.Oferta;
 import com.pokefantasy.api.servicio.OfertaService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,7 @@ public class OfertaController {
     }
 
     @PostMapping
-    public Oferta crear(@RequestBody CrearOfertaRequest request) {
+    public Oferta crear(@Valid @RequestBody CrearOfertaRequest request) {
         return ofertaService.crearOferta(
                 request.getIdPokemon(),
                 request.getIdOferente(),

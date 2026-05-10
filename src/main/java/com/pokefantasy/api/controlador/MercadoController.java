@@ -5,6 +5,7 @@ import com.pokefantasy.api.dto.OfertaMercadoDTO;
 import com.pokefantasy.api.dto.PonerEnVentaRequest;
 import com.pokefantasy.api.modelo.Mercado;
 import com.pokefantasy.api.servicio.MercadoService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,13 +32,13 @@ public class MercadoController {
     }
 
     @PostMapping
-    public Mercado ponerEnVenta(@RequestBody PonerEnVentaRequest request) {
+    public Mercado ponerEnVenta(@Valid @RequestBody PonerEnVentaRequest request) {
         return mercadoService.ponerEnVenta(request.getIdPokemon(), request.getPrecio(), request.getIdVendedor());
     }
 
     @PostMapping("/{idMercado}/comprar")
     public ResponseEntity<String> comprar(@PathVariable int idMercado,
-                                           @RequestBody ComprarRequest request) {
+                                           @Valid @RequestBody ComprarRequest request) {
         if (mercadoService.comprar(idMercado, request.getIdComprador())) {
             return ResponseEntity.ok("Compra realizada");
         }

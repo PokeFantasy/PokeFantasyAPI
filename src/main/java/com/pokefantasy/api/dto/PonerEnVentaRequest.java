@@ -1,20 +1,31 @@
 package com.pokefantasy.api.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class PonerEnVentaRequest {
 
-    private int idPokemon;
-    private double precio;
-    private int idVendedor;
+    @NotNull(message = "idPokemon es obligatorio")
+    @Positive(message = "idPokemon debe ser mayor que 0")
+    private Integer idPokemon;
+
+    @NotNull(message = "precio es obligatorio")
+    @Positive(message = "precio debe ser mayor que 0")
+    private Double precio;
+
+    @NotNull(message = "idVendedor es obligatorio")
+    @Positive(message = "idVendedor debe ser mayor que 0")
+    private Integer idVendedor;
 
     public PonerEnVentaRequest() {
     }
 
-    public int getIdPokemon() { return idPokemon; }
-    public void setIdPokemon(int idPokemon) { this.idPokemon = idPokemon; }
+    public Integer getIdPokemon() { return idPokemon; }
+    public void setIdPokemon(Integer idPokemon) { this.idPokemon = idPokemon; }
 
-    public double getPrecio() { return precio; }
-    public void setPrecio(double precio) { this.precio = precio; }
+    public Double getPrecio() { return precio; }
+    public void setPrecio(Double precio) { this.precio = precio; }
 
-    public int getIdVendedor() { return idVendedor; }
-    public void setIdVendedor(int idVendedor) { this.idVendedor = idVendedor; }
+    public Integer getIdVendedor() { return idVendedor; }
+    public void setIdVendedor(Integer idVendedor) { this.idVendedor = idVendedor; }
 }

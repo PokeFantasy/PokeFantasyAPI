@@ -4,6 +4,7 @@ import com.pokefantasy.api.dto.ClasificacionEntry;
 import com.pokefantasy.api.dto.CrearLigaRequest;
 import com.pokefantasy.api.modelo.Liga;
 import com.pokefantasy.api.servicio.LigaService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,7 @@ public class LigaController {
     }
 
     @PostMapping
-    public Liga crear(@RequestBody CrearLigaRequest request) {
+    public Liga crear(@Valid @RequestBody CrearLigaRequest request) {
         return ligaService.crearLiga(request.getNombre(), request.getIdCreador());
     }
 

@@ -1,26 +1,34 @@
 package com.pokefantasy.api.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class AplicarObjetoRequest {
 
-    private int idPokemon;
-    private int idObjeto;
+    @NotNull(message = "idPokemon es obligatorio")
+    @Positive(message = "idPokemon debe ser mayor que 0")
+    private Integer idPokemon;
+
+    @NotNull(message = "idObjeto es obligatorio")
+    @Positive(message = "idObjeto debe ser mayor que 0")
+    private Integer idObjeto;
 
     public AplicarObjetoRequest() {
     }
 
-    public int getIdPokemon() {
+    public Integer getIdPokemon() {
         return idPokemon;
     }
 
-    public void setIdPokemon(int idPokemon) {
+    public void setIdPokemon(Integer idPokemon) {
         this.idPokemon = idPokemon;
     }
 
-    public int getIdObjeto() {
+    public Integer getIdObjeto() {
         return idObjeto;
     }
 
-    public void setIdObjeto(int idObjeto) {
+    public void setIdObjeto(Integer idObjeto) {
         this.idObjeto = idObjeto;
     }
 }

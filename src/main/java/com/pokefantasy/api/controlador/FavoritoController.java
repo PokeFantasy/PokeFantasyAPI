@@ -2,6 +2,7 @@ package com.pokefantasy.api.controlador;
 
 import com.pokefantasy.api.dto.FavoritoRequest;
 import com.pokefantasy.api.servicio.FavoritoService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class FavoritoController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> agregar(@RequestBody FavoritoRequest request) {
+    public ResponseEntity<Void> agregar(@Valid @RequestBody FavoritoRequest request) {
         favoritoService.agregar(request.getIdUsuario(), request.getIdPokemon());
         return ResponseEntity.ok().build();
     }

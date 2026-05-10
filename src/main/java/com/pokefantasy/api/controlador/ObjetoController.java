@@ -3,6 +3,7 @@ package com.pokefantasy.api.controlador;
 import com.pokefantasy.api.dto.AplicarObjetoRequest;
 import com.pokefantasy.api.modelo.Objeto;
 import com.pokefantasy.api.servicio.ObjetoService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,7 @@ public class ObjetoController {
     }
 
     @PostMapping("/aplicar")
-    public ResponseEntity<String> aplicar(@RequestBody AplicarObjetoRequest request) {
+    public ResponseEntity<String> aplicar(@Valid @RequestBody AplicarObjetoRequest request) {
         boolean ok = objetoService.aplicarObjeto(request.getIdPokemon(), request.getIdObjeto());
         if (ok) {
             return ResponseEntity.ok("Objeto aplicado correctamente");

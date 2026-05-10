@@ -1,8 +1,11 @@
 package com.pokefantasy.api.controlador;
 
 import com.pokefantasy.api.dto.LoginRequest;
+import com.pokefantasy.api.dto.LoginResponse;
 import com.pokefantasy.api.modelo.Usuario;
+import com.pokefantasy.api.seguridad.JwtService;
 import com.pokefantasy.api.servicio.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,20 +19,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final JwtService jwtService;
 
-    public UsuarioController(UsuarioService usuarioService) {
+    public UsuarioController(UsuarioService usuarioService, JwtService jwtService) {
         this.usuarioService = usuarioService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Usuario> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
         return usuarioService.login(request.getEmail(), request.getContrasena())
-                .map(ResponseEntity::ok)
+                .map(usuario -> ResponseEntity.ok(
+                        new LoginResponse(jwtService.generarToken(usuario), usuario)))
                 .orElseGet(() -> ResponseEntity.status(401).build());
     }
 
     @PostMapping("/registro")
-    public ResponseEntity<?> registrar(@RequestBody Usuario usuario) {
+    public ResponseEntity<?> registrar(@Valid @RequestBody Usuario usuario) {
         try {
             Usuario creado = usuarioService.registrar(usuario);
             return ResponseEntity.ok(creado);
